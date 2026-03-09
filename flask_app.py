@@ -109,23 +109,56 @@ def index():
 
 @app.get("/osi")
 def osi():
-    # What we can observe from an app (mostly L7/L4, hints of lower layers)
+    # Ce qu'une application web peut observer dans le modèle OSI
+    # (principalement couche 7 et un peu couche 4)
+
     info = {
-        "L7_Application": {
-            "http_method": request.method,
-            "path": request.path,
-            "headers_subset": {k: request.headers.get(k) for k in ["Host","User-Agent","Accept","Content-Type"]}
+        "Couche_7_Application": {
+            "description": "Interaction directe avec l'application web (HTTP).",
+            "methode_http": request.method,
+            "chemin_requete": request.path,
+            "exemple_entetes_http": {
+                k: request.headers.get(k)
+                for k in ["Host", "User-Agent", "Accept", "Content-Type"]
+            }
         },
-        "L6_Presentation": "Often handled by libraries: JSON (UTF-8), TLS details not exposed here",
-        "L5_Session": "HTTP keep-alive / cookies; session mgmt at app/framework level",
-        "L4_Transport": {
-            "remote_addr": request.remote_addr,
-            "note": "TCP used under the hood for HTTP(S). Ports/handshake not directly visible in Flask."
+
+        "Couche_6_Presentation": {
+            "description": "Gestion du format des données et du chiffrement.",
+            "exemple": "JSON (UTF-8), encodage des données, TLS/HTTPS.",
+            "remarque": "Souvent gérée par les bibliothèques ou le serveur web."
         },
-        "L3_Network": "IP routing happens below; we see the client IP (possibly via proxy).",
-        "L2_DataLink": "Ethernet/Wi-Fi frames not visible to app in PaaS.",
-        "L1_Physical": "Cables/radio not visible to app."
+
+        "Couche_5_Session": {
+            "description": "Gestion de la session entre client et serveur.",
+            "exemple": "Cookies, sessions HTTP, maintien de connexion (keep-alive).",
+            "remarque": "Généralement gérée par le framework ou l'application."
+        },
+
+        "Couche_4_Transport": {
+            "description": "Communication entre machines via TCP ou UDP.",
+            "adresse_client": request.remote_addr,
+            "remarque": "HTTP utilise TCP. Les détails du handshake ou des ports ne sont pas visibles directement dans Flask."
+        },
+
+        "Couche_3_Reseau": {
+            "description": "Routage des paquets IP entre réseaux.",
+            "remarque": "L'application ne voit généralement que l'adresse IP du client (souvent via un proxy)."
+        },
+
+        "Couche_2_Liaison_de_donnees": {
+            "description": "Transmission des trames sur le réseau local.",
+            "exemple": "Ethernet ou Wi-Fi.",
+            "remarque": "Les adresses MAC et les trames ne sont pas visibles dans une application web."
+        },
+
+        "Couche_1_Physique": {
+            "description": "Transmission physique des bits.",
+            "exemple": "Câble réseau, fibre optique, ondes radio Wi-Fi.",
+            "remarque": "Totalement invisible pour une application."
+        }
     }
+
     return jsonify(info)
 
 @app.get("/service")
