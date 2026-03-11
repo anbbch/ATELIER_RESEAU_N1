@@ -56,15 +56,13 @@ Vous pouvez observez les différentes couches OSI sur votre site **{site}.python
 **Exercice 1 : Définissez les termes suivants (Répondre directement dans GitHub)**    
 * Un protocole,
   
-Un protocole est un ensemble de règles et de conventions qui définissent comment les entités d’un réseau communiquent entre elles.
-Il précise le format des messages, leur ordre d’envoi et les actions à effectuer lors de la communication.
+Un protocole de niveau N est un ensemble de règles associé à une couche N qui permet de supporter un service N, par exemple acheminer des informations entre deux hôtes. Un protocole de niveau N peut supporter la mise en oeuvre éventuelle de plusieurs services. Ces règles s'enchaînent de façon précise, définissent des états dont l'occurrence dépend d'états antérieurs et d'événements, et qui génère d'autres événements.
 
 Exemple : HTTP, TCP, IP.
 
 * Une entité protocolaire,
 
-Une entité protocolaire est la partie d’un système (logicielle ou matérielle) qui implémente un protocole dans une couche du modèle OSI.
-Elle communique avec l’entité correspondante sur une autre machine en utilisant ce protocole.
+Une entité protocolaire de niveau N correspond au programme qui exécute un protocole de niveau N sur un hôte. C'est souvent matérialisé par un automate (machine à états - modèle formel qui décrit les différents états possibles). On utilise dans ce cas l'expression automate protocolaire.
 
 Exemple : l’implémentation de TCP dans le système d’exploitation.
 
@@ -77,8 +75,12 @@ Exemple : la couche transport fournit un service de communication fiable aux app
 
 * Une primitive de service,
 
-Une primitive de service est une opération utilisée pour accéder à un service offert par une couche.
-Elle permet la communication entre la couche utilisatrice et la couche qui fournit le service.
+Une primitive de service : Une primitive de service est une opération qui invoque un service réalisé par une entité protocolaire. Pour un service, elles sont au nombre de 4 : 
+- REQ (Request)
+- IND (Indication)
+- RESP (Response)
+- CONF (Confirmation)
+Parfois REQ et IND sont les seules définies. Par exemple T-CON-REQ, est une primitive de service de demande d'ouverture de connexion de la couche Session ou au-dessus à la couche Transport.
 
 Les primitives classiques sont par exemple :
 
@@ -89,19 +91,14 @@ Les primitives classiques sont par exemple :
 
 * Une Service Data Unit (SDU) par rapport à une PDU
 
-SDU (Service Data Unit) : données fournies par la couche supérieure à la couche inférieure.
-PDU (Protocol Data Unit) : unité de données après ajout des informations du protocole (en-tête, éventuellement trailer).
-
-👉 Donc :
-PDU = SDU + informations de protocole (header/trailer).
+SDU vs PDU : Une SDU correspond aux informations qui sont passées à l'aide d'une primitive de service, Les PDU pour émission sont formées par une SDU de la couche supérieure à laquelle on a ajouté des informations de contrôle (adresse destination, adresse  source, numérotation de message, taille de fenêtre glissante…) pour la transmettre.
+<img width="552" height="204" alt="image" src="https://github.com/user-attachments/assets/cd464564-c28f-43bd-9588-bb753ba277ce" />
 
 * Un point d'accès à un service SAP (Service Access Point)
 
-Un SAP est un point d’interface entre deux couches du modèle OSI permettant à la couche supérieure d’accéder aux services de la couche inférieure.
-Chaque SAP possède une adresse ou un identifiant permettant de distinguer les services.
+SAP (Service Access Point) : Un point d'accès à un service SAP (Service Access Point) est un point de traversée de l'interface entre 2 couches adjacentes. C'est aussi l'identification ou l'adresse, unique, d'un accès à un service..
 
-Exemple :
-Un port TCP peut être considéré comme un SAP pour les applications.
+
 
 ---------------------------------------------------
 🗺️ Séquence 5 : Retour sur le protocole DHCP
