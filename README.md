@@ -106,7 +106,8 @@ SAP (Service Access Point) : Un point d'accès à un service SAP (Service Access
 Vous pouvez observez le protocole DHCP sur votre site **{site}.pythonanywhere.com/dhcp**  
   
 **Exercice 2 : Créer une image montrant l’encapsulation des couches suivantes**    
-_Collez votre image ici_ 
+<img width="2816" height="1536" alt="image" src="https://github.com/user-attachments/assets/a1443350-6884-4954-912f-c4ad76a1c5d6" />
+
   
 --------------------------------------------------------------------
 🧠 Troubleshooting :
