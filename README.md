@@ -54,12 +54,54 @@ Vous avez vu dans cette séquence comment créer des secrets GiHUB afin de mettr
 Vous pouvez observez les différentes couches OSI sur votre site **{site}.pythonanywhere.com/osi**  
   
 **Exercice 1 : Définissez les termes suivants (Répondre directement dans GitHub)**    
-* Un protocole,  
+* Un protocole,
+  
+Un protocole est un ensemble de règles et de conventions qui définissent comment les entités d’un réseau communiquent entre elles.
+Il précise le format des messages, leur ordre d’envoi et les actions à effectuer lors de la communication.
+
+Exemple : HTTP, TCP, IP.
+
 * Une entité protocolaire,
-* Un service,  
-* Une primitive de service,  
-* Une Service Data Unit (SDU) par rapport à une PDU  
-* Un point d'accès à un service SAP (Service Access Point)  
+
+Une entité protocolaire est la partie d’un système (logicielle ou matérielle) qui implémente un protocole dans une couche du modèle OSI.
+Elle communique avec l’entité correspondante sur une autre machine en utilisant ce protocole.
+
+Exemple : l’implémentation de TCP dans le système d’exploitation.
+
+* Un service,
+
+Un service est une fonctionnalité fournie par une couche du modèle OSI à la couche supérieure.
+Il définit ce que la couche offre, sans préciser comment cela est réalisé.
+
+Exemple : la couche transport fournit un service de communication fiable aux applications.
+
+* Une primitive de service,
+
+Une primitive de service est une opération utilisée pour accéder à un service offert par une couche.
+Elle permet la communication entre la couche utilisatrice et la couche qui fournit le service.
+
+Les primitives classiques sont par exemple :
+
+- REQUEST
+- INDICATION
+- RESPONSE
+- CONFIRM
+
+* Une Service Data Unit (SDU) par rapport à une PDU
+
+SDU (Service Data Unit) : données fournies par la couche supérieure à la couche inférieure.
+PDU (Protocol Data Unit) : unité de données après ajout des informations du protocole (en-tête, éventuellement trailer).
+
+👉 Donc :
+PDU = SDU + informations de protocole (header/trailer).
+
+* Un point d'accès à un service SAP (Service Access Point)
+
+Un SAP est un point d’interface entre deux couches du modèle OSI permettant à la couche supérieure d’accéder aux services de la couche inférieure.
+Chaque SAP possède une adresse ou un identifiant permettant de distinguer les services.
+
+Exemple :
+Un port TCP peut être considéré comme un SAP pour les applications.
 
 ---------------------------------------------------
 🗺️ Séquence 5 : Retour sur le protocole DHCP
